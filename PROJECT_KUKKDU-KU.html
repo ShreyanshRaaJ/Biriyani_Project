@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KUKKDU-KU Chicken Biryani</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#120000;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* NAVBAR */
+nav{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:78px;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    background:rgba(20,0,0,.72);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(255,210,31,.2);
+}
+
+.logo{
+    color:#ffd21f;
+    font-size:27px;
+    font-weight:900;
+}
+.logo small{
+    display:block;
+    color:white;
+    font-size:10px;
+    letter-spacing:3px;
+    margin-top:-3px;
+}
+
+.links{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+.links a{
+    color:white;
+    text-decoration:none;
+    font-size:15px;
+    font-weight:bold;
+}
+.links a:hover{color:#ffd21f}
+
+.order-top{
+    background:#ffd21f;
+    color:#620000 !important;
+    padding:12px 20px;
+    border-radius:25px;
+}
+
+.hero{
+    position:relative;
+    height:100vh;
+    min-height:650px;
+    overflow:hidden;
+}
+
+.slide{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    visibility:hidden;
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:center;
+    transition:opacity .7s ease;
+}
+
+.slide.active{
+    opacity:1;
+    visibility:visible;
+}
+
+.slide:before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        90deg,
+        rgba(10,0,0,.94) 0%,
+        rgba(20,0,0,.78) 38%,
+        rgba(20,0,0,.28) 75%,
+        rgba(0,0,0,.45) 100%
+    );
+}
+
+.s1{background-image:url("https://images.unsplash.com/photo-1563379091339-03246963d96c?auto=format&fit=crop&w=2000&q=85")}
+.s2{background-image:url("https://images.unsplash.com/photo-1517244683847-7456b63c5969?auto=format&fit=crop&w=2000&q=85")}
+.s3{background-image:url("https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=2000&q=85")}
+.s4{background-image:url("https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=2000&q=85")}
+.s5{background-image:url("https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=2000&q=85")}
+.s6{background-image:url("https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=2000&q=85")}
+
+.content{
+    position:relative;
+    z-index:5;
+    width:100%;
+    max-width:1250px;
+    margin:auto;
+    padding:110px 8% 80px;
+}
+
+.small-title{
+    color:#ffd21f;
+    font-size:15px;
+    font-weight:bold;
+    letter-spacing:5px;
+    margin-bottom:16px;
+}
+
+h1{
+    font-size:clamp(55px,7vw,100px);
+    line-height:.9;
+    color:#ffd21f;
+    text-transform:uppercase;
+    text-shadow:4px 5px 0 #650000;
+    margin-bottom:20px;
+}
+
+h1 span{
+    display:block;
+    color:white;
+}
+
+.tagline{
+    font-size:clamp(20px,2.2vw,30px);
+    font-weight:bold;
+    margin-bottom:18px;
+}
+
+.description{
+    max-width:600px;
+    color:#ffe9c2;
+    line-height:1.7;
+    font-size:17px;
+}
+
+.features{
+    display:flex;
+    flex-wrap:wrap;
+    gap:24px;
+    margin:25px 0;
+}
+
+.feature{font-weight:bold}
+.feature b{color:#ffd21f;font-size:20px}
+
+.buttons{display:flex;gap:15px;flex-wrap:wrap}
+
+.btn{
+    display:inline-block;
+    text-decoration:none;
+    font-weight:900;
+    padding:15px 30px;
+    border-radius:30px;
+}
+
+.primary{
+    background:#ffd21f;
+    color:#650000;
+}
+.secondary{
+    border:2px solid white;
+    color:white;
+}
+.btn:hover{transform:translateY(-3px)}
+
+.arrow{
+    position:absolute;
+    z-index:20;
+    top:50%;
+    transform:translateY(-50%);
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    border:2px solid white;
+    background:rgba(0,0,0,.3);
+    color:white;
+    font-size:28px;
+    cursor:pointer;
+}
+.arrow:hover{
+    background:#ffd21f;
+    color:#650000;
+}
+.prev{left:25px}
+.next{right:25px}
+
+.dots{
+    position:absolute;
+    z-index:30;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:9px;
+}
+.dot{
+    width:11px;
+    height:11px;
+    border-radius:50%;
+    background:#aaa;
+    cursor:pointer;
+}
+.dot.active{
+    width:32px;
+    background:#ffd21f;
+    border-radius:20px;
+}
+
+/* INFO */
+.info{
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:25px;
+    padding:30px 7%;
+    background:#650000;
+}
+.info-box{text-align:center}
+.info-box h3{color:#ffd21f;margin-bottom:6px}
+.info-box p{color:#ffe5c0}
+
+/* MOBILE */
+@media(max-width:850px){
+    nav{padding:0 20px}
+    .links a:not(.order-top){display:none}
+    .content{padding:110px 9% 80px}
+    h1{font-size:55px}
+    .arrow{width:45px;height:45px;font-size:22px}
+    .prev{left:10px}
+    .next{right:10px}
+}
+@media(max-width:500px){
+    .hero{min-height:700px}
+    .logo{font-size:20px}
+    .logo small{font-size:8px}
+    .small-title{font-size:10px;letter-spacing:3px}
+    h1{font-size:45px}
+    .description{font-size:14px}
+    .secondary{display:none}
+    .info{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">
+        KUKKDU-KU 🍗
+        <small>CHICKEN BIRIYANI</small>
+    </div>
+
+    <div class="links">
+        <a href="#">Home</a>
+        <a href="#">Menu</a>
+        <a href="#">Specials</a>
+        <a href="#">Locations</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="#" class="order-top">Order Now →</a>
+    </div>
+</nav>
+
+<section class="hero">
+
+    <div class="slide s1 active">
+        <div class="content">
+            <div class="small-title">HYDERABADI • DUM • BIRYANI</div>
+            <h1>KUKKDU-KU<span>CHICKEN BIRIYANI</span></h1>
+            <div class="tagline">Chicken Biryani, Full Hyderabadi Swag! 🔥</div>
+            <p class="description">
+                Full dum biryani, full flavour aur full chicken!
+                Ek baar khao Miyan, phir baar-baar aao.
+                Fresh ingredients aur asli Hyderabadi taste.
+            </p>
+            <div class="features">
+                <div class="feature"><b>🍗</b> Fresh Chicken</div>
+                <div class="feature"><b>🔥</b> Dum Cooked</div>
+                <div class="feature"><b>🚚</b> Fast Delivery</div>
+            </div>
+            <div class="buttons">
+                <a class="btn primary" href="#">ORDER NOW KARO 🍗</a>
+                <a class="btn secondary" href="#">Our Story →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide s2">
+        <div class="content">
+            <div class="small-title">SLOW COOKED • FULL FLAVOUR</div>
+            <h1>DUM<span>BIRIYANI</span></h1>
+            <div class="tagline">Dheere Pakta Hai, Dil Jeet Leta Hai ❤️</div>
+            <p class="description">
+                Aromatic basmati rice, juicy chicken aur secret masala —
+                sabko ekdum dum pe pakaya jaata hai.
+            </p>
+            <div class="features">
+                <div class="feature"><b>🍚</b> Long Grain Rice</div>
+                <div class="feature"><b>🌶️</b> Secret Masala</div>
+                <div class="feature"><b>🔥</b> Slow Cooked</div>
+            </div>
+            <div class="buttons">
+                <a class="btn primary" href="#">KHAAO BHAI 🔥</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide s3">
+        <div class="content">
+            <div class="small-title">SPECIAL CHICKEN MEAL</div>
+            <h1>FULL<span>CHICKEN!</span></h1>
+            <div class="tagline">Chicken kam hua toh paisa wapas! 😂</div>
+            <p class="description">
+                Tender chicken pieces, masaledaar biryani,
+                fresh onion, mint aur chilled raita.
+            </p>
+            <div class="features">
+                <div class="feature"><b>🍗</b> Juicy Chicken</div>
+                <div class="feature"><b>🥗</b> Fresh Salad</div>
+                <div class="feature"><b>🥣</b> Creamy Raita</div>
+            </div>
+            <div class="buttons">
+                <a class="btn primary" href="#">PLATE LAGAO 🍗</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide s4">
+        <div class="content">
+            <div class="small-title">FRESH INGREDIENTS</div>
+            <h1>ASLI<span>SWAD</span></h1>
+            <div class="tagline">Fresh masala. Fresh chicken. Fresh mood. 😎</div>
+            <p class="description">
+                Fresh chicken, premium spices, aromatic rice
+                aur proper cooking — isi se banta hai KUKKDU-KU.
+            </p>
+            <div class="features">
+                <div class="feature"><b>🌿</b> Fresh Herbs</div>
+                <div class="feature"><b>🌶️</b> Premium Spices</div>
+                <div class="feature"><b>🍗</b> Quality Chicken</div>
+            </div>
+            <div class="buttons">
+                <a class="btn primary" href="#">TASTE KARO 🔥</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide s5">
+        <div class="content">
+            <div class="small-title">HOT • FRESH • AT YOUR DOOR</div>
+            <h1>ORDER<span>ONLINE</span></h1>
+            <div class="tagline">Hostel mein baithe-baithe biryani mangao! 🚚</div>
+            <p class="description">
+                Bhook lagi hai? Kitchen jaane ka mann nahi?
+                Koi tension nahi. Hot & fresh biryani seedha doorstep tak.
+            </p>
+            <div class="features">
+                <div class="feature"><b>📦</b> Secure Packing</div>
+                <div class="feature"><b>🔥</b> Hot Delivery</div>
+                <div class="feature"><b>⚡</b> Fast Service</div>
+            </div>
+            <div class="buttons">
+                <a class="btn primary" href="#">ORDER KARO NN BABY ❤️</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide s6">
+        <div class="content">
+            <div class="small-title">ONE BITE • ONE LOVE</div>
+            <h1>EK BAAR<span>KHAAO!</span></h1>
+            <div class="tagline">Phir baar-baar mangao. 😋</div>
+            <p class="description">
+                Desi taste, proper masala aur chicken ki full power.
+                KUKKDU-KU sirf biryani nahi, bhai ek emotion hai.
+            </p>
+            <div class="features">
+                <div class="feature"><b>❤️</b> Made With Love</div>
+                <div class="feature"><b>🔥</b> Full Flavour</div>
+                <div class="feature"><b>🍗</b> Full Chicken</div>
+            </div>
+            <div class="buttons">
+                <a class="btn primary" href="#">LAST CHANCE 😈</a>
+            </div>
+        </div>
+    </div>
+
+    <button class="arrow prev" onclick="changeSlide(-1)">❮</button>
+    <button class="arrow next" onclick="changeSlide(1)">❯</button>
+
+    <div class="dots">
+        <span class="dot active" onclick="goToSlide(0)"></span>
+        <span class="dot" onclick="goToSlide(1)"></span>
+        <span class="dot" onclick="goToSlide(2)"></span>
+        <span class="dot" onclick="goToSlide(3)"></span>
+        <span class="dot" onclick="goToSlide(4)"></span>
+        <span class="dot" onclick="goToSlide(5)"></span>
+    </div>
+
+</section>
+
+<section class="info">
+    <div class="info-box">
+        <h3>📞 ORDER NOW</h3>
+        <p>+91 9608487915</p>
+    </div>
+
+    <div class="info-box">
+        <h3>🚚 FREE DELIVERY</h3>
+        <p>On orders above ₹120</p>
+    </div>
+
+    <div class="info-box">
+        <h3>📍 LOCATION</h3>
+        <p>ABES Hostel Gate No. 2</p>
+    </div>
+</section>
+
+<script>
+let currentSlide = 0;
+
+const slides = document.querySelectorAll(".slide");
+const dots = document.querySelectorAll(".dot");
+
+function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove("active"));
+    dots.forEach(dot => dot.classList.remove("active"));
+
+    currentSlide = (index + slides.length) % slides.length;
+
+    slides[currentSlide].classList.add("active");
+    dots[currentSlide].classList.add("active");
+}
+
+function changeSlide(direction) {
+    showSlide(currentSlide + direction);
+}
+
+function goToSlide(index) {
+    showSlide(index);
+}
+
+/* Auto slide every 5 seconds */
+setInterval(() => {
+    changeSlide(1);
+}, 5000);
+
+/* Keyboard arrows */
+document.addEventListener("keydown", event => {
+    if (event.key === "ArrowRight") changeSlide(1);
+    if (event.key === "ArrowLeft") changeSlide(-1);
+});
+</script>
+
+</body>
+</html>
